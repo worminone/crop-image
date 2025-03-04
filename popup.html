@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="./js/cropper.min.js"></script>
+    <script src="./js/popup.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script> 
+    <title>Image Cropper</title>
+</head>
+
+<body>
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h1 class="mb-4" style ="font-size:15px;"data-i18n="title">
+                    <a href="http://cropimage.app" target="_blank">Free Online Image Cropper Tool</a>
+                </h1>
+
+                <div class="upload-container">
+                    <div class="upload-area mb-4" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt mb-3"></i>
+                            <div class="upload-type-selector mb-4">
+                                <div class="btn-group" role="group">
+                                    <input type="radio" class="btn-check" name="uploadType" id="uploadTypeFile"
+                                        checked="">
+                                    <label class="btn btn-outline-primary btn-line" for="uploadTypeFile">
+                                        <i class="fas fa-file-upload me-2"></i>
+                                        <span data-i18n="localFile">Local File</span>
+                                    </label>
+
+                                    <input type="radio" class="btn-check" name="uploadType" id="uploadTypeUrl">
+                                    <label class="btn btn-outline-primary btn-line" for="uploadTypeUrl">
+                                        <i class="fas fa-link me-2"></i>
+                                        <span data-i18n="imageUrl">Image URL</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="upload-options">
+                                <div id="fileUploadOption" class="upload-option">
+                                    <button class="btn btn-primary btn-lg upload-btn">
+                                        <i class="fas fa-file-upload me-2"></i>Choose Image <input type="file"
+                                            id="fileInput" class="file-input" accept="image/*">
+                                    </button>
+                                </div>
+                                <div id="urlUploadOption" class="upload-option" style="display: none;">
+                                    <div class="input-group url-input-group">
+                                        <input type="text" class="form-control" id="imageUrl"
+                                            placeholder="Enter image URL">
+                                        <button class="btn btn-primary" type="button" id="loadUrlButton">
+                                            <i class="fas fa-link me-2"></i>Load </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-muted">Supported formats: JPG, PNG, BMP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 裁剪区域 -->
+                <div id="cropperContainer" class="cropper-container mt-4" style="display: none;">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="img-container mb-3">
+                                <img id="cropImage" src="https://cropimage.app/" alt="Preview" style="max-width: 100%;">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="crop-controls">
+
+                                <!-- 基础图片编辑工具 -->
+                                <div class="basic-image-controls mb-4">
+                                    <h5 class="mb-3">Image Controls</h5>
+
+                                    <!-- 缩放控制 -->
+                                    <div class="zoom-controls mb-3">
+                                        <button class="btn btn-sm btn-outline-secondary" id="zoomOut">
+                                            <i class="fas fa-search-minus"></i>
+                                        </button>
+                                        <input type="range" class="form-range mx-2" id="zoomRange" min="0" max="200"
+                                            value="100">
+                                        <span class="zoom-value" id="zoomValue">100%</span>
+                                        <button class="btn btn-sm btn-outline-secondary" id="zoomIn">
+                                            <i class="fas fa-search-plus"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- 旋转和翻转控制 -->
+                                    <div class="transform-controls">
+                                        <div class="btn-group w-100">
+                                            <button class="btn btn-outline-secondary" id="rotateLeft"
+                                                title="Rotate Left">
+                                                <i class="fas fa-undo"></i>
+                                            </button>
+                                            <button class="btn btn-outline-secondary" id="rotateRight"
+                                                title="Rotate Right">
+                                                <i class="fas fa-redo"></i>
+                                            </button>
+                                            <button class="btn btn-outline-secondary" id="flipHorizontal"
+                                                title="Flip Horizontal">
+                                                <i class="fas fa-arrows-alt-h"></i>
+                                            </button>
+                                            <button class="btn btn-outline-secondary" id="flipVertical"
+                                                title="Flip Vertical">
+                                                <i class="fas fa-arrows-alt-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 裁剪形状选择 -->
+                                <div class="mb-4">
+                                    <label class="form-label">Crop Shape</label>
+                                    <div class="btn-group shape-group" role="group">
+                                        <input type="radio" class="btn-check" name="cropShape" id="shapeRect"
+                                            value="rect" checked="">
+                                        <label class="btn btn-outline-primary" for="shapeRect">
+                                            <i class="fas fa-square"></i>
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="cropShape" id="shapeCircle"
+                                            value="circle">
+                                        <label class="btn btn-outline-primary" for="shapeCircle">
+                                            <i class="fas fa-circle"></i>
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="cropShape" id="shapeHeart"
+                                            value="heart">
+                                        <label class="btn btn-outline-primary" for="shapeHeart">
+                                            <i class="fas fa-heart"></i>
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="cropShape" id="shapePolygon"
+                                            value="polygon">
+                                        <label class="btn btn-outline-primary" for="shapePolygon">
+                                            <i class="fas fa-draw-polygon"></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- 输出格式选择 -->
+                                <div class="mb-4">
+                                    <label class="form-label">Output Format</label>
+                                    <select class="form-select" id="outputFormat">
+                                        <option value="png">PNG</option>
+                                        <option value="jpeg">JPEG</option>
+                                        <option value="webp">WebP</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <button type="button" class="btn btn-outline-primary w-100 mb-2" id="resetButton">
+                                        <i class="fas fa-undo me-2"></i>Reset Crop </button>
+                                </div>
+
+                                <button type="button" class="btn btn-primary w-100" id="cropButton">
+                                    <i class="fas fa-crop me-2"></i>Crop Image </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+   
+</body>
+
+</html>

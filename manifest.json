@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "crop image",
+  "version": "1.0",
+  "description": "Crop images in various shapes.",
+  "permissions": ["storage","activeTab"],
+  "homepage_url": "https://www.cropimage.app",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "image/icon16.png",
+      "48": "image/icon48.png",
+      "128": "image/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "image/icon16.png",
+    "48": "image/icon48.png",
+    "128": "image/icon128.png"
+  },
+  "host_permissions": [
+    "https://cdn.jsdelivr.net/*",
+    "https://cdnjs.cloudflare.com/*",
+    "https://cropimage.app/*"
+  ]
+}

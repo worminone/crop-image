@@ -1,0 +1,810 @@
+/* 全局样式 */
+body {
+    min-height: 100vh;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* 上传区域样式 */
+.upload-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.upload-area {
+    border: 3px dashed #e0e0e0;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: #0d6efd;
+    background-color: #f1f3f5;
+}
+
+.upload-area.active {
+    border-color: #0d6efd;
+    background-color: #e8f0fe;
+}
+
+.upload-content {
+    position: relative;
+}
+
+.upload-content i {
+    font-size: 48px;
+    color: #0d6efd;
+}
+
+.upload-type-selector {
+    /* margin: 20px 0; */
+}
+
+.upload-type-selector .btn-group {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.upload-type-selector .btn {
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+.upload-type-selector .btn-check:checked + .btn-outline-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+}
+
+.upload-options {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.upload-option {
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.upload-btn {
+    position: relative;
+    overflow: hidden;
+    padding: 12px 30px;
+    width: 100%;
+}
+
+.url-input-group {
+    margin: 0 auto;
+}
+
+.url-input-group input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.url-input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* 裁剪模态框样式 */
+.cropper-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 20px;
+    z-index: 900;
+    touch-action: pan-y pinch-zoom;
+}
+
+.img-container {
+    height: 600px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 40px;
+    touch-action: pan-y pinch-zoom;
+}
+
+.img-container img {
+    display: block;
+    max-width: none;
+    max-height: none;
+}
+
+/* Cropper.js 相关样式 */
+.cropper-container.cropper-bg {
+    background-image: none;
+}
+
+/* 增强裁剪控制点的可见性 */
+.cropper-point {
+    width: 10px;
+    height: 10px;
+    opacity: 0.9;
+    background-color: #0d6efd;
+    z-index: 950;
+}
+
+.cropper-point.point-se {
+    width: 10px;
+    height: 10px;
+    opacity: 0.9;
+    background-color: #0d6efd;
+}
+
+.cropper-line {
+    background-color: #0d6efd;
+    opacity: 0.3;
+    z-index: 950;
+}
+
+.cropper-view-box {
+    outline: 2px solid #0d6efd;
+    outline-color: rgba(13, 110, 253, 0.75);
+}
+
+.cropper-view-box,
+.cropper-face {
+    border-radius: 0;
+}
+
+/* 调整裁剪区域的外观 */
+.cropper-modal {
+    opacity: 0.3;
+}
+
+.crop-controls {
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    position: sticky;
+    top: 20px;
+    z-index: 1000;
+}
+
+.crop-controls h4 {
+    color: #0d6efd;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+/* 裁剪参数布局 */
+.crop-params {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.param-row {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    flex: 1;
+    min-width: 200px;
+    font-size: 16px;
+}
+
+.param-label {
+    text-align: right;
+    color: #495057;
+    font-weight: 500;
+    width: 85px;
+}
+
+.param-desc {
+    color: #6c757d;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.crop-controls .input-group {
+    background-color: #fff;
+    border-radius: 4px;
+    display: inline-flex;
+    width: auto;
+}
+
+.crop-controls input[type="number"] {
+    border: 1px solid #ced4da;
+    padding: 0.5rem;
+    text-align: center;
+    height: auto;
+    width: 80px;
+    border-right: none;
+}
+
+.crop-controls .input-group-text {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: 500;
+    border: 1px solid #ced4da;
+    width: 35px;
+    justify-content: center;
+}
+
+.crop-controls small.text-muted {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 8px;
+    color: #6c757d;
+}
+
+.crop-controls input[type="number"]:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.crop-controls .btn {
+    padding: 0.8rem 1.5rem;
+    font-weight: 500;
+}
+
+.crop-controls .btn-outline-primary {
+    /* background-color: #fff; */
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .crop-controls {
+        position: static;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .param-row {
+        min-width: 50%;
+    }
+
+    .param-label {
+        font-size: 14px;
+        width: 75px;
+    }
+
+    .param-desc {
+        display: none;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .features .col-md-4 {
+        margin-bottom: 2rem;
+    }
+    .crop-controls {
+        padding: 15px;
+    }
+    .param-row {
+        min-width: 50%;
+        margin-bottom: 15px;
+    }
+    .param-desc {
+        display: none;
+    }
+    .upload-options {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .upload-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .url-input-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .param-row {
+        min-width: 100%;
+    }
+    
+    .crop-controls input[type="number"] {
+        width: 80px;
+    }
+}
+
+
+/* 标题样式优化 */
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.lead {
+    font-size: 1.2rem;
+    color: #596777;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 语言切换样式 */
+.flag-icon {
+    border-radius: 2px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.2);
+}
+
+.dropdown-item {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.current-lang {
+    margin-left: 4px;
+}
+
+.mb-4 {
+    margin-bottom: 0.3rem !important;
+}
+.mb-4 a {
+    text-decoration: none;
+    color: #123456;
+}
+/* 移动端适配 */
+@media (max-width: 767.98px) {
+
+    .upload-area {
+        padding: 20px;
+        margin: 0 10px;
+    }
+
+    .upload-content i {
+        font-size: 36px;
+    }
+
+    .upload-content h3 {
+        font-size: 1.1rem;
+        margin: 10px 0;
+    }
+	
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 0.3rem !important;
+    }
+
+    .mb-5 {
+        margin-bottom: 2rem !important;
+    }
+
+    .my-5 {
+        margin-top: 2rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .img-container {
+        height: 400px;
+        margin-bottom: 20px;
+    }
+    
+    .cropper-container {
+        padding: 10px;
+    }
+    
+    .cropper-view-box,
+    .cropper-face {
+        touch-action: none;
+    }
+    
+    .cropper-crop-box {
+        touch-action: none;
+    }
+    
+    /* 确保裁剪控制面板始终可见 */
+    .crop-controls {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 1000;
+        padding: 15px;
+        margin: 0 -10px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    /* 优化触摸区域 */
+    .cropper-point {
+        width: 15px;
+        height: 15px;
+        opacity: 0.8;
+    }
+    
+    .cropper-line {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+/* 形状遮罩样式 */
+.shape-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.heart-mask {
+    -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,15 C55,10 65,0 85,0 C95,0 100,5 100,15 C100,25 95,35 90,45 C85,55 75,65 50,95 C25,65 15,55 10,45 C5,35 0,25 0,15 C0,5 5,0 15,0 C35,0 45,10 50,15Z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50,15 C55,10 65,0 85,0 C95,0 100,5 100,15 C100,25 95,35 90,45 C85,55 75,65 50,95 C25,65 15,55 10,45 C5,35 0,25 0,15 C0,5 5,0 15,0 C35,0 45,10 50,15Z' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+.polygon-mask {
+    -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50,0 100,25 100,75 50,100 0,75 0,25' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50,0 100,25 100,75 50,100 0,75 0,25' fill='black'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* 裁剪框样式优化 */
+.cropper-crop-box {
+    background: none !important;
+}
+
+.cropper-view-box {
+    outline: none !important;
+}
+
+/* 裁剪框遮罩样式 */
+.cropper-face {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+/* 裁剪框控制点样式 */
+.cropper-point {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* 形状选择按钮组样式优化 */
+.shape-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 5px;
+    width: 100%;
+}
+
+.shape-group .btn {
+    flex: 1;
+    padding: 8px;
+    min-width: 40px;
+    max-width: 60px;
+}
+
+.shape-group .btn i {
+    font-size: 14px;
+}
+
+/* 在较小屏幕上进一步优化按钮大小 */
+@media (max-width: 1200px) {
+    .shape-group .btn {
+        padding: 6px;
+        min-width: 36px;
+    }
+    
+    .shape-group .btn i {
+        font-size: 12px;
+    }
+}
+
+/* 图片编辑工具栏样式 */
+.image-edit-toolbar {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.image-edit-toolbar .btn {
+    padding: 6px 12px;
+    margin-right: 5px;
+    font-size: 14px;
+}
+
+.image-edit-toolbar .btn i {
+    margin-right: 5px;
+}
+
+/* 缩放控制样式 */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.zoom-controls .zoom-value {
+    min-width: 60px;
+    text-align: center;
+}
+
+/* 裁剪控制区域样式 */
+/* 基础图片编辑工具样式 */
+.basic-image-controls {
+    padding: 8px;
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.basic-image-controls .btn-group {
+    /* margin-bottom: 10px; */
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.basic-image-controls .btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* 缩放控制样式 */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* margin-bottom: 15px; */
+}
+
+.zoom-controls .zoom-value {
+    min-width: 60px;
+    text-align: center;
+    background: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+}
+
+.zoom-controls input[type="range"] {
+    flex: 1;
+}
+
+/* 裁剪形状样式 */
+.circle-mask {
+    border-radius: 50% !important;
+    overflow: hidden;
+}
+
+/* 圆形裁剪时的预览样式 */
+.cropper-view-box.circle-mask,
+.cropper-face.circle-mask {
+    border-radius: 50% !important;
+}
+
+/* 确保裁剪框的背景透明 */
+.cropper-view-box {
+    outline: none !important;
+    border-radius: 0;
+    outline: none !important;
+}
+
+/* 优化裁剪框的边框样式 */
+.cropper-face {
+    background: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+/* 预览容器样式 */
+.preview-container {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/* 按钮样式优化 */
+.crop-actions .btn {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.crop-actions .btn i {
+    margin-right: 8px;
+}
+
+/* 裁剪操作按钮样式 */
+.crop-actions {
+    margin-top: 2rem;
+}
+
+.crop-actions .btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+.crop-actions .btn i {
+    margin-right: 0.5rem;
+}
+
+/* 预览容器样式 */
+.preview-container {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.preview-container .btn {
+    padding: 0.75rem;
+    font-size: 1rem;
+}
+
+/* 图片编辑控制样式 */
+.basic-image-controls {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+}
+
+/* 缩放控制样式 */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.zoom-controls .btn {
+    padding: 6px 10px;
+    min-width: 36px;
+}
+
+.zoom-controls .form-range {
+    flex: 1;
+}
+
+.zoom-value {
+    min-width: 60px;
+    text-align: center;
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* 变换控制样式 */
+.transform-controls .btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.transform-controls .btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.transform-controls .btn i {
+    margin-right: 0;
+} 
+
+
+/* 公共样式 */
+.btn-group{
+    flex-wrap: wrap;
+}
+.btn-group .btn {
+    /* border-radius: 8px; 扁平化设计，去掉圆角 */
+    background-color: transparent; /* 背景透明 */
+    color: #212529; /* 按钮文字颜色 */
+     border: 2px solid #007bff; /*边框  颜色 */
+    transition: background-color 0.3s, color 0.3s; /*添加过渡效果*/
+    margin: 5px;
+    /* border: 2px solid transparent; */
+    /* background-image: linear-gradient(to right, #2a65bc, #939fe9); */
+}
+
+.btn-group .btn-line {
+    width: 125px;
+    font-size: 8px;
+    height: 50px;
+}
+
+.btn-group .btn:hover {
+    background-color: #007bff; /* 悬停时背景颜色 */
+    color: white; /* 悬停时文字颜色 */
+}
+
+/* 自定义裁剪区域样式 */
+.cropper-view-box,
+.cropper-face {
+    border-radius: 50%;
+}
+
+.cropper-view-box {
+    outline: 0;
+    box-shadow: 0 0 0 1px #39f;
+}
+
+/* 预览容器样式 */
+.preview-container {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+} 
+
+.text-about {
+    font-size: 1.2em;
+    line-height: 1.5;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+}
+
+.navbar-nav .dropdown-menu {
+     position: absolute; 
+}
